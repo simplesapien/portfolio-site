@@ -1,16 +1,18 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
-import { useProgress, Stage, shaderMaterial } from '@react-three/drei'
-import { Suspense } from 'react'
+import { useState } from 'react'
 import vertexShader from '../shaders/vertex.glsl'
 import fragmentShader from '../shaders/fragment.glsl'
 import { useFrame } from '@react-three/fiber'
+import { useScroll } from '@react-three/drei'
 
 
-export default function App() {
+export default function Scene() {
 
     const mesh = useRef();
-    const hover = useRef(false);
+    const scroll = useScroll()
+    let isScrolling = false;
+    let prevScroll = scroll.offset;
 
     const uniforms = useMemo(
         () => ({
@@ -21,7 +23,7 @@ export default function App() {
                 value: 0.1,
             },
             u_frequency: {
-                value: 0.4,
+                value: 0.5,
             },
         }),
         []
@@ -31,9 +33,16 @@ export default function App() {
         const { clock } = state;
         mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
 
+        if (scroll.offset > prevScroll || scroll.offset < prevScroll) {
+            isScrolling = true;
+        } else {
+            isScrolling = false;
+        }
+        prevScroll = scroll.offset;
+
         mesh.current.material.uniforms.u_intensity.value = THREE.MathUtils.lerp(
             mesh.current.material.uniforms.u_intensity.value,
-            hover.current ? 0.65 : 0.15,
+            isScrolling ? 0.65 : 0.15,
             0.02
         );
     })
@@ -49,22 +58,17 @@ export default function App() {
 
     return (
         <>
-            {/* <Loader /> */}
-            <mesh
-                ref={mesh}
-                rotation={[Math.PI * 1.5, 0, 0]}
-                onPointerOver={() => (hover.current = true)}
-                onPointerOut={() => (hover.current = false)}
-            >
-                <icosahedronGeometry args={[2, 20]} />
-                <shaderMaterial
-                    fragmentShader={fragmentShader}
-                    vertexShader={vertexShader}
-                    uniforms={uniforms}
-                    side={THREE.DoubleSide}
-                />
-            </mesh>
-
+                <mesh
+                    ref={mesh}
+                    rotation={[Math.PI * 1.5, 0, 0]}
+                >
+                    <icosahedronGeometry args={[2, 20]} />
+                    <shaderMaterial
+                        fragmentShader={fragmentShader}
+                        vertexShader={vertexShader}
+                        uniforms={uniforms}
+                    />
+                </mesh>
         </>
     )
 }

@@ -5,15 +5,28 @@
 
 body,
 html {
+    font-family: 'Satoshi', sans-serif;
     height: 100%;
     width: 100%;
+}
+
+h1 {
+    font-size: min(200px, 6vw);
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2%;
+    user-select: none;
 }
 
 #root {
     position: absolute;
     height: 100%;
     width: 100%;
-    background: #cacaca;
+    background: #ffffff;
 }
 
 #overlay {

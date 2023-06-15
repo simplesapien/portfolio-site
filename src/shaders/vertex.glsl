@@ -5,8 +5,6 @@ uniform float u_frequency;
 varying vec2 vUv;
 varying float vDisplacement;
 
-
-
 // Classic Perlin 3D Noise 
 // by Stefan Gustavson
 vec4 permute(vec4 x) {
