@@ -8,6 +8,7 @@ html {
     font-family: 'Satoshi', sans-serif;
     height: 100%;
     width: 100%;
+    background: #90d6a6;
 }
 
 h1 {
@@ -26,7 +27,7 @@ h1 {
     position: absolute;
     height: 100%;
     width: 100%;
-    background: #ffffff;
+    background: #90d6a6;
 }
 
 #overlay {

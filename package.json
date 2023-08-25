@@ -4,6 +4,7 @@
     "@react-spring/web": "^9.7.2",
     "@react-three/drei": "^9.68.3",
     "@react-three/fiber": "^8.13.0",
+    "@react-three/postprocessing": "^2.15.1",
     "glsl-noise": "^0.0.0",
     "glslify": "^7.1.1",
     "react": "^18.2.0",
