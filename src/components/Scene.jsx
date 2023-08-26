@@ -1,10 +1,8 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, ScrollControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
-import Ball from './Ball.jsx';
-import Ground from './Ground.jsx';
-import Podium from './Podium.jsx';
+import Stage from './Stage.jsx';
 
 export default function App () {
     
@@ -19,13 +17,13 @@ export default function App () {
         <>
             <Canvas
                 shadows
-                camera={{ position: [4, 4, 12], fov: 24 }}
+                camera={{ position: [4, 4, 12] }}
             >   
-                <Perf />
+                {/* <Perf position="bottom-left"/> */}
+                {/* <ScrollControls pages={5}>              */}
                 <OrbitControls />
-                <Ball />
-                {/* <Ground /> */}
-                <Podium />
+                <Stage />
+                {/* </ScrollControls> */}
             </Canvas>
         </>
     );

@@ -7,16 +7,16 @@ export default function Sphere(){
 
   const matRef = useRef()
 
-  useFrame((state) => {
-      const { clock } = state
-      matRef.current.uniforms.uTime.value = clock.getElapsedTime();
+  useFrame((state, delta) => {
+    // Update uTime uniform
+    const { clock } = state
+    matRef.current.uniforms.uTime.value = clock.getElapsedTime();
   })
 
   const uniforms = {
     uTime: { value: 0.0 },
   };
 
- 
   return (
     <>
       <mesh>
